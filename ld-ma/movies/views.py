@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 from .models import UserProfile
-from . forms import LoginForm
+from . forms import LoginForm,SignUpForm
 
 
 config = ConfigParser()
@@ -162,7 +162,7 @@ def login_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -171,7 +171,7 @@ def signup_view(request):
             user = authenticate(username=username, password=password, email=email)
             return redirect('movies:login')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'sign-up.html', {'form': form})
     
 @login_required
