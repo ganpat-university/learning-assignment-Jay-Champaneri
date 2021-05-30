@@ -127,7 +127,7 @@ body, html {
   left: 0;
   top: 0;
   width: 100%;
-  opacity: 0.4; 
+  
 
   background-repeat: repeat-y;
   background-position: center;
@@ -141,7 +141,8 @@ body, html {
   </style>
 </head>
 
-<body class="bg" background="111.png">
+<body class="bg">
+	<img src="111.png" alt="">
   <nav class="navbar navbar-expand-lg fixed-top">
     <a class="navbar-brand" href="{% url 'movies:home' %}">Expo-DB</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
