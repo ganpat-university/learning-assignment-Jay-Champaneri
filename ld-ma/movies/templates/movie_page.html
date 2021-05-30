@@ -1,0 +1,109 @@
+{% load bootstrap3%}{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+
+        <style>
+          nav{
+        background-color: #000000;
+        color: #0496af;
+        font-family: 'Oswald', sans-serif;
+        padding: auto;
+        height: max-content;
+    }
+    
+    .navbar-header.navbar-brand{
+        
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 15px;
+    }
+    
+    .navbar-brand{
+      color: #0496af;
+      font-size: xx-large;
+      margin: auto;
+    }
+    </style>
+</head>
+
+<body style="background-color: #1e1e1e;">
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #1e1e1e; font-family: 'Oswald', sans-serif;">
+    <div class="col-md-6 mb-4 container"></div>
+      <a class="navbar-brand" href="{% url 'movies:home' %}">Expo-db</a>
+    </div>
+    
+  </nav>
+  {% bootstrap_javascript %}
+  <div style="width: max-content; font-family: 'Oswald', sans-serif; color: #0496af;">
+   
+    <h3 class="title">Trending Now:</h3>
+    <div>
+          {% for movie in popular_movie %}
+          <a href="{% url 'movies:details' movie.id 'm' %}">
+            <img src="https://image.tmdb.org/t/p/w342/{{movie.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" /></a>
+          {% endfor %}
+      <div>
+        {% if popular.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if popular.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+    <h3 class="title">Recommended from Expo-stream:</h3>
+    <div>
+          {% for movie in top_rated_movie %}
+          <a href="{% url 'movies:details' movie.id 'm' %}">
+            <img class="tile__img" src="https://image.tmdb.org/t/p/w342/{{movie.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" />
+          </a>
+          {% endfor %}
+      <div>
+        {% if upcoming.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if upcoming.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+    <h3 class="title">Upcoming Movies:</h3>
+    <div>
+          {% for movie in upcoming_movie %}
+          <a href="{% url 'movies:details' movie.id 'm' %}">
+            <img src="https://image.tmdb.org/t/p/w342/{{movie.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" /></a>
+          {% endfor %}
+      <div>
+        {% if latest_movie.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if latest_movie.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+    <h3 class="title">New on Expo-stream:</h3>
+    <div>
+          {% for movie in now_playing_movie %}
+          <a href="{% url 'movies:details' movie.id 'm' %}">
+            <img src="https://image.tmdb.org/t/p/w342/{{movie.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" /></a>
+          {% endfor %}
+      <div>
+        {% if now_playing_movie.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if now_playing_movie.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+  </div> 
+</body>
+</html>

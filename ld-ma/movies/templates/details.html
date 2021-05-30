@@ -1,0 +1,309 @@
+{% load bootstrap3%}
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+  <title>Expo-stream</title>
+  <link rel="stylesheet" href="{% static 'movies/app.css' %}"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+  <style>
+      nav{
+    background-color: #000000;
+    color: #0496af;
+    font-family: 'Oswald', sans-serif;
+    padding: auto;
+    height: max-content;
+}
+
+.navbar-header.navbar-brand{
+    font-size: 1.8em;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 15px;
+}
+
+.navbar-brand{
+  color: #0496af;
+}
+
+
+.navbar-nav > li >a{
+    color: #0496af;
+}
+
+li{
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 1.15em;
+    
+}
+
+.btn {        
+	font-size: 10px;
+	font-weight: bold;
+	background: #0496af !important;
+	border: none;
+	min-width: 140px;
+}
+.btn:hover .btn:focus {
+	background:#04505e !important;
+	outline: none !important;
+}
+
+
+
+   
+.navbar-nav {
+  position: absolute;
+  padding: auto;
+  background-color: #1e1e1e;
+  color: #0496af;
+  font-family: 'Oswald', sans-serif;
+  border-bottom: 3px solid transparent;
+
+}
+
+.nav-item{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.navbar-nav > li >a:hover{
+  border-bottom: 3px solid #0496af;
+}
+
+.navbar-nav > li >a:active{
+  border-bottom: 3px solid #0496af;
+} 
+
+.navbar-brand > a:hover{
+  color: #0496af;
+}
+
+.navbar-brand > a:active{
+  color: #0496af;
+}
+  </style>
+</head>
+
+<body class="bg" style="background-color: #1e1e1e;">
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #1e1e1e; font-family: 'Oswald', sans-serif;">
+    <a class="navbar-brand" href="{% url 'movies:home' %}">Expo-DB</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+      
+      <div class="collapse navbar-collapse" id="navbarScroll" style="color: #0496af; ">
+        <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll">
+          <li class="nav-item" style="padding-left: 15px; padding-right: 15px; font-size: 1.15em;">
+            <a class="nav-link" href="{% url 'movies:movie' %}">Movies</a>
+          </li>
+          <li class="nav-item" style="padding-left: 15px; padding-right: 15px; font-size: 1.15em;">
+            <a class="nav-link" href="{% url 'movies:series' %}">Series</a>
+          </li>
+          <li class="nav-item" style="padding-left: 15px; padding-right: 15px; font-size: 1.15em;">
+            <a class="nav-link" href="{% url 'movies:signup' %}">Sign-Up</a>
+          </li>
+          </li>
+          <li class="nav-item" style="padding-left: 15px; padding-right: 15px; font-size: 1.15em;">
+            <a class="nav-link" href="{% url 'movies:login' %}">Log-In</a>
+          </li>
+          <li class="nav-item" style="padding-left: 15px; padding-right: 15px; font-size: 1.15em;">
+            <a class="nav-link" href="{% url 'movies:logout' %}">Log-Out</a>
+          </li>
+        </ul>
+      </div>
+
+    <div class="col-md-6 mb-4"></div>
+
+    <a href="{% url 'movies:search' %}">
+    <button type="submit" class="btn btn-secondary btn-md" style="color: black; background-color: #0496af; font-size: 10px; max-width: 140px; font-weight: bold;">Search</button>
+    </a>
+
+    </div>
+    
+</nav>
+<br><br><br><br>
+
+    <div>
+        <div class="container">
+            <div class="details" background="https://image.tmdb.org/t/p/original{{ info.backdrop_path }}">
+                <div class="sidebar">
+                    <img class="details__image" src='https://image.tmdb.org/t/p/w600_and_h900_bestv2{{ info.poster_path }}' onerror="this.src='https://dummyimage.com/600x900/ababab/ffffff.png&amp;text=+Poster'"/>
+
+                    <div class="details__content-header">
+                        <p>Runtime</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.runtime %}
+                            <p>{{ info.runtime }} mins</p>
+                        {% else %}
+                            <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="details__content-header">
+                        <p>Genres</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.genres %} 
+                            {% for genre in info.genres %}
+                                <p>{{ genre.name }}</p>
+                            {% endfor %} 
+                        {% else %}
+                        <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="details__content-header">
+                        <p>Production</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.production_companies %} 
+                            {% for company in info.production_companies %}
+                                <p>{{ company.name }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="details__content-header">
+                        <p>Spoken Languages</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.spoken_languages %}
+                            {% for language in info.spoken_languages %}
+                                <p>{{ language.name }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="details__content-header">
+                        <p>Trailer</p>
+                    </div>
+                    {% for trailer in trailers %}
+                    <div class="details__content" >
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ trailer.key }}"></iframe>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="content" style="margin-left: 3rem;">
+                    <div class="details__title">
+                        <p style="display: inline;">{{ info.title }}</p>
+                        <p style="display: inline;">({{ year }})</p>
+                    </div>
+                    <div class="details__title">
+                        <i class="fa fa-star" style="color: #0496af"></i>
+                        <p style="display: inline; font-size: 2rem; color: #0496af; font-weight: 900">{{ info.vote_average }}/10</p>
+                    </div>
+                    <div class="details__content-header" style="font-size: 1.5rem; text-transform: uppercase; ">
+                        <p>{{ info.tagline }}</p>
+                    </div>
+                    <div class="details__content" style="font-size: 1rem; margin-top: 2rem">
+                        <p>
+                            {{ info.overview }}
+                        </p>
+                    </div>
+
+                    <div class="credits">
+                        {% if cast %}
+                        <div class="credit-list">
+                            <div class="details__content-header">
+                                <p>Cast</p>
+                            </div>
+                            {% for member in cast %}
+                            <div class="details__content">
+                                <p style="display:inline;">{{ member.name }}</p>
+                                {% if member.character %}
+                                <p style="display:inline; color: #0496af; font-size: 1rem;">as {{ member.character }}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %} {% if crew %}
+                        <div class="credit-list">
+                            <div class="details__content-header">
+                                <p>Crew</p>
+                            </div>
+                            {% for member in crew %}
+                            <div class="details__content">
+                                <p style="display:inline;">{{ member.name }}</p>
+                                {% if member.job %}
+                                <p style="display:inline; color: #0496af; font-size: 1rem;">, {{ member.job }}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %} {% if trailers %}
+                        <div class="content">
+                            <div class="details__content-header">
+                                <p>Also known as</p>
+                            </div>
+                            <div class="details__content" style="font-size: 1rem;">
+                                {% if alt %}
+                                    {% for title in alt %}
+                                        <p>{{ title.title }}</p>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>⸺</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="details__content-header">
+                                <p>Keywords</p>
+                            </div>
+                            <div class="details__content">
+                                {% if keywords %} {% for keyword in keywords %}
+                                <p style="font-size: 1rem;">{{ keyword.name }}</p>
+                                {% endfor %} {% else %}
+                                <p>⸺</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="sidebar">
+                </div>
+                <div class="content" style="margin-left: 2rem;">
+                    {% if reviews %}
+                        <div class="details__content-header">
+                            <p>Reviews</p>
+                        </div>
+                        {% for review in reviews %}
+                            <div class="details__content">
+                                <p>{{ review.author }}</p>
+                                <p style="font-size: 1rem;">{{ review.content }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+            <script src="{% static 'movies/app.js' %}"></script>
+</body>
+</html>

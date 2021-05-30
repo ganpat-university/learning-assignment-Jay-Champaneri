@@ -1,0 +1,112 @@
+{% load bootstrap3%}{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+      nav{
+        background-color: #000000;
+        color: #0496af;
+        font-family: 'Oswald', sans-serif;
+        padding: auto;
+        height: max-content;
+    }
+    
+    .navbar-header.navbar-brand{
+        
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 15px;
+    }
+    
+    .navbar-brand{
+      color: #0496af;
+      font-size: xx-large;
+      margin: auto;
+    }
+    </style>    
+</head>
+
+<body style="background-color: #1e1e1e;">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript"> 
+  </script>
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #1e1e1e; font-family: 'Oswald', sans-serif;">
+    <div class="col-md-6 mb-4 container"></div>
+      <a class="navbar-brand" href="{% url 'movies:home' %}">Expo-db</a>
+    </div>
+    
+  </nav>
+  {% bootstrap_javascript %}
+  <div style="width: max-content; font-family: 'Oswald', sans-serif; color: #0496af;">
+    <h3 class="title">Trending Now:</h3>
+    <div>
+          {% for series in popular_series %}
+          <a href="{% url 'movies:details' series.id 't' %}">
+            <img src="https://image.tmdb.org/t/p/w342/{{series.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" /></a>
+          {% endfor %}
+      <div>
+        {% if popular_series.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if popular_series.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+    
+    <h3 class="title">Recommended from Expo-stream:</h3>
+    <div>
+          {% for series in top_rated_series%}
+          <a href="{% url 'movies:details' series.id 't' %}">
+            <img class="tile__img" src="https://image.tmdb.org/t/p/w342/{{series.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" />
+          </a>
+          {% endfor %}
+      <div>
+        {% if upcoming.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if upcoming.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+    <h3 class="title">New on Expo-stream:</h3>
+    <div>
+          {% for series in airing_today_series %}
+          <a href="{% url 'movies:details' series.id 't' %}">
+            <img src="https://image.tmdb.org/t/p/w342/{{series.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" /></a>
+          {% endfor %}
+      <div>
+        {% if airing_today_series.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if airing_today_series.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+    <h3 class="title">Latest & popular:</h3>
+    <div>
+          {% for series in on_the_air_series %}
+          <a href="{% url 'movies:details' series.id 't' %}">
+            <img src="https://image.tmdb.org/t/p/w342/{{series.poster_path}}" alt="" style="margin: 7.5px 7.5px 7.5px 7.5px; border: 4px solid #0496af; border-radius: 5px;" /></a>
+          {% endfor %}
+      <div>
+        {% if on_the_air_series.has_prev %}
+          <button data-dir="prev">&lt;</button>
+        {% endif %}
+        {% if on_the_air_series.has_next %}
+          <button data-dir="next">&gt;</button>
+        {% endif %}
+      </div>
+    </div>
+  </div> 
+</body>
+</html>
+
