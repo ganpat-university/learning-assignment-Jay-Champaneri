@@ -157,22 +157,28 @@ def login_view(request):
     
     return render(request, 'log-in.html', context=context)
         
-             
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 
-def signup_view(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password, email=email)
-            return redirect('movies:login')
-    else:
-        form = SignUpForm()
-    return render(request, 'sign-up.html', {'form': form})
+# def signup_view(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             email = form.cleaned_data.get('email')
+#             password = form.cleaned_data.get('password1')
+#             user = authenticate(username=username, password=password, email=email)
+#             return redirect('movies:login')
+#     else:
+#         form = SignUpForm()
+#     return render(request, 'sign-up.html', {'form': form})
+
+class SignUpView(CreateView):
+    form_class = SignUpForm
+    success_url = reverse_lazy('login')
+    template_name = 'sign-up.html'
     
 @login_required
 def logout_view(request):
