@@ -10,4 +10,4 @@ from rest_framework.reverse import reverse as api_reverse
 
 # Create your models here.
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_profile")
+    username = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_profile")
