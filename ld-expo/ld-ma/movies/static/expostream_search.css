@@ -1,0 +1,14 @@
+a{
+    color: #e01b2c !important;
+    font-family: 'Sansita Swashed', cursive;
+}
+
+body{
+    background-image: url(https://wallpaperaccess.com/full/3658600.jpg);
+    background-size: cover;
+    background-position: relative;
+}
+
+button{
+    color: #e01b2c !important;
+}
